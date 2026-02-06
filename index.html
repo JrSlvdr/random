@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine 💖</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Arial", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffe6ea, #ffd6e0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      width: 100%;
+      padding: 20px;
+      z-index: 3;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #d6336c;
+      margin-bottom: 25px;
+      z-index: 4;
+      position: relative;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+
+    button {
+      width: 80%;
+      max-width: 280px;
+      padding: 16px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    #yesBtn {
+      background: #ff4d6d;
+      color: white;
+      z-index: 1;
+    }
+
+    #noBtn {
+      background: #adb5bd;
+      color: #000;
+      z-index: 2;
+      position: relative;
+    }
+
+    #message {
+      display: none;
+      font-size: 2rem;
+      color: #ff4d6d;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 id="question">Will you be my Valentine? 💘</h1>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn">No</button>
+    </div>
+
+    <div id="message">Sabi ko na mahal mo talaga ako e, i love u pretty</div>
+  </div>
+
+ <script>
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const message = document.getElementById("message");
+
+  const phrases = [
+    "Bakit?",
+    "Sure ka na?",
+    "Sure na sure ka na?",
+    "fr ba? :((",
+    "Gagi wag",
+    "Please say yes",
+    "PRESS YES",
+    "PLEASEEEEE"
+  ];
+
+  let index = 0;
+  let scale = 1;
+
+  noBtn.addEventListener("click", () => {
+    // Change No text in order
+    if (index < phrases.length) {
+      noBtn.textContent = phrases[index];
+    } else {
+      noBtn.textContent = "😐";
+    }
+
+    // Grow Yes button
+    scale += 0.35;
+    yesBtn.style.transform = `scale(${scale})`;
+
+    // Make Yes fill most of the screen (but not the question)
+    if (scale > 4) {
+  yesBtn.style.position = "fixed";
+  yesBtn.style.bottom = "0";
+  yesBtn.style.left = "0";
+  yesBtn.style.width = "100vw";
+  yesBtn.style.height = "100vh";
+  yesBtn.style.borderRadius = "0";
+  yesBtn.style.fontSize = "3rem";
+  yesBtn.style.zIndex = "9999";
+}
+
+noBtn.style.zIndex = "0"; // push No behind
+
+    index++;
+  });
+
+  yesBtn.addEventListener("click", () => {
+    noBtn.style.display = "none";
+    yesBtn.style.display = "none";
+    message.style.display = "block";
+  });
+</script>
+
+
+</body>
+</html>
